@@ -1,0 +1,45 @@
+﻿@model SysProgAnket3.Models.Hocalar
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Öğretmen Detayları</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Adı
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.adi)
+        </dd>
+
+        <dt>
+            Soyadı
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.soyadi)
+        </dd>
+        <dt>
+            Kodu
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.hoca_kodu)
+        </dd>
+        <dt>
+            Bölümü
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Bolumler.bolum_adi)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Düzenle", "Edit", new { id = Model.hoca_kodu }) |
+    @Html.ActionLink("Listeye Dön", "Index")
+</p>

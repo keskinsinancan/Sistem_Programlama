@@ -1,0 +1,64 @@
+﻿@model IEnumerable<SysProgAnket3.Models.Hocalar>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<body>
+    <h2>Öğretmen Listesi</h2>
+
+    <p>
+        @Html.ActionLink("Öğretmen Ekle", "Create")
+    </p>
+    <table class="table table-bordered" id="lecturerTable">
+        <thead>
+            <tr>
+                <th>
+                    Kodu
+                </th>
+                <th>
+                    Adı
+                </th>
+                <th>
+                    Soyadı
+                </th>
+                <th>
+                    Bölümü
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.hoca_kodu)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.adi)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.soyadi)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Bolumler.bolum_adi)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Düzenle", "Edit", new { id = item.hoca_kodu }) |
+                        @Html.ActionLink("Detaylar", "Details", new { id = item.hoca_kodu }) |
+                        @Html.ActionLink("Sil", "Delete", new { id = item.hoca_kodu })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+    <script>
+  $(function(){
+      $("#lecturerTable").dataTable();
+  })
+    </script>
+</body>

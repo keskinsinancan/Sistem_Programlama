@@ -1,0 +1,66 @@
+﻿@model SysProgAnket3.Models.Ders_Detaylari
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ders Detayları</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Ders Adı
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ders_adi)
+        </dd>
+
+        <dt>
+            Teori
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.teori)
+        </dd>
+
+        <dt>
+            Pratik
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pratik)
+        </dd>
+
+        <dt>
+            Lab
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lab)
+        </dd>
+
+        <dt>
+            Toplam Kredi
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.toplam_kredi)
+        </dd>
+
+        <dt>
+            Bölüm Adı
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bolumler.bolum_adi)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Düzenle", "Edit", new { id = Model.ders_kodu }) |
+    @Html.ActionLink("Listeye Geri Dön", "Index")
+</p>

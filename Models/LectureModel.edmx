@@ -1,0 +1,613 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SysProgDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bolumler">
+          <Key>
+            <PropertyRef Name="bolum_kodu" />
+          </Key>
+          <Property Name="bolum_kodu" Type="int" Nullable="false" />
+          <Property Name="bolum_adi" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ders_Detaylari">
+          <Key>
+            <PropertyRef Name="ders_kodu" />
+          </Key>
+          <Property Name="ders_kodu" Type="int" Nullable="false" />
+          <Property Name="ders_adi" Type="nvarchar" MaxLength="255" />
+          <Property Name="teori" Type="int" />
+          <Property Name="pratik" Type="int" />
+          <Property Name="lab" Type="int" />
+          <Property Name="toplam_kredi" Type="int" />
+          <Property Name="acan_bolum_kodu" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SysProgDb.dbo.Dersler' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Dersler">
+          <Key>
+            <PropertyRef Name="grup_no" />
+            <PropertyRef Name="dersin_adi" />
+          </Key>
+          <Property Name="ders_kodu" Type="int" />
+          <Property Name="grup_no" Type="int" Nullable="false" />
+          <Property Name="dersin_adi" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="hoca_kodu" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SysProgDb.dbo.Fakulte_Bolum' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Fakulte_Bolum">
+          <Key>
+            <PropertyRef Name="fakulte_kodu" />
+            <PropertyRef Name="bolum_kodu" />
+          </Key>
+          <Property Name="fakulte_kodu" Type="int" Nullable="false" />
+          <Property Name="bolum_kodu" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Fakulteler">
+          <Key>
+            <PropertyRef Name="fakulte_kodu" />
+          </Key>
+          <Property Name="fakulte_kodu" Type="int" Nullable="false" />
+          <Property Name="fakulte_adı" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Hocalar">
+          <Key>
+            <PropertyRef Name="hoca_kodu" />
+          </Key>
+          <Property Name="hoca_kodu" Type="int" Nullable="false" />
+          <Property Name="adi" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="soyadi" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="bolum_kodu" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SysProgDb.dbo.Ogrenci_Ders' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Ogrenci_Ders">
+          <Key>
+            <PropertyRef Name="ogr_no" />
+            <PropertyRef Name="ders_kodu" />
+            <PropertyRef Name="grubu" />
+          </Key>
+          <Property Name="ogr_no" Type="int" Nullable="false" />
+          <Property Name="ders_kodu" Type="int" Nullable="false" />
+          <Property Name="grubu" Type="int" Nullable="false" />
+          <Property Name="ders_adi" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Ogrenciler">
+          <Key>
+            <PropertyRef Name="ogr_no" />
+          </Key>
+          <Property Name="ogr_no" Type="int" Nullable="false" />
+          <Property Name="adi" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="soyadi" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="bolum_kodu" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="role" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_acan_bolum_kodu">
+          <End Role="Bolumler" Type="Self.Bolumler" Multiplicity="0..1" />
+          <End Role="Ders_Detaylari" Type="Self.Ders_Detaylari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bolumler">
+              <PropertyRef Name="bolum_kodu" />
+            </Principal>
+            <Dependent Role="Ders_Detaylari">
+              <PropertyRef Name="acan_bolum_kodu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_blm_kodu">
+          <End Role="Bolumler" Type="Self.Bolumler" Multiplicity="1" />
+          <End Role="Ogrenciler" Type="Self.Ogrenciler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bolumler">
+              <PropertyRef Name="bolum_kodu" />
+            </Principal>
+            <Dependent Role="Ogrenciler">
+              <PropertyRef Name="bolum_kodu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_bol_kodu">
+          <End Role="Bolumler" Type="Self.Bolumler" Multiplicity="1" />
+          <End Role="Hocalar" Type="Self.Hocalar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bolumler">
+              <PropertyRef Name="bolum_kodu" />
+            </Principal>
+            <Dependent Role="Hocalar">
+              <PropertyRef Name="bolum_kodu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_bolum_kodu">
+          <End Role="Bolumler" Type="Self.Bolumler" Multiplicity="1" />
+          <End Role="Fakulte_Bolum" Type="Self.Fakulte_Bolum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bolumler">
+              <PropertyRef Name="bolum_kodu" />
+            </Principal>
+            <Dependent Role="Fakulte_Bolum">
+              <PropertyRef Name="bolum_kodu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ders_kodu">
+          <End Role="Ders_Detaylari" Type="Self.Ders_Detaylari" Multiplicity="0..1" />
+          <End Role="Dersler" Type="Self.Dersler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ders_Detaylari">
+              <PropertyRef Name="ders_kodu" />
+            </Principal>
+            <Dependent Role="Dersler">
+              <PropertyRef Name="ders_kodu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_drs_kodu">
+          <End Role="Ders_Detaylari" Type="Self.Ders_Detaylari" Multiplicity="1" />
+          <End Role="Ogrenci_Ders" Type="Self.Ogrenci_Ders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ders_Detaylari">
+              <PropertyRef Name="ders_kodu" />
+            </Principal>
+            <Dependent Role="Ogrenci_Ders">
+              <PropertyRef Name="ders_kodu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_fakulte_kodu">
+          <End Role="Fakulteler" Type="Self.Fakulteler" Multiplicity="1" />
+          <End Role="Fakulte_Bolum" Type="Self.Fakulte_Bolum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fakulteler">
+              <PropertyRef Name="fakulte_kodu" />
+            </Principal>
+            <Dependent Role="Fakulte_Bolum">
+              <PropertyRef Name="fakulte_kodu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_hoca_kodu">
+          <End Role="Hocalar" Type="Self.Hocalar" Multiplicity="0..1" />
+          <End Role="Dersler" Type="Self.Dersler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hocalar">
+              <PropertyRef Name="hoca_kodu" />
+            </Principal>
+            <Dependent Role="Dersler">
+              <PropertyRef Name="hoca_kodu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ogr_no">
+          <End Role="Ogrenciler" Type="Self.Ogrenciler" Multiplicity="1" />
+          <End Role="Ogrenci_Ders" Type="Self.Ogrenci_Ders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ogrenciler">
+              <PropertyRef Name="ogr_no" />
+            </Principal>
+            <Dependent Role="Ogrenci_Ders">
+              <PropertyRef Name="ogr_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SysProgDbModelStoreContainer">
+          <EntitySet Name="Bolumler" EntityType="Self.Bolumler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ders_Detaylari" EntityType="Self.Ders_Detaylari" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fakulteler" EntityType="Self.Fakulteler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hocalar" EntityType="Self.Hocalar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ogrenciler" EntityType="Self.Ogrenciler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dersler" EntityType="Self.Dersler" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Dersler].[ders_kodu] AS [ders_kodu], 
+    [Dersler].[grup_no] AS [grup_no], 
+    [Dersler].[dersin_adi] AS [dersin_adi], 
+    [Dersler].[hoca_kodu] AS [hoca_kodu]
+    FROM [dbo].[Dersler] AS [Dersler]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Fakulte_Bolum" EntityType="Self.Fakulte_Bolum" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Fakulte_Bolum].[fakulte_kodu] AS [fakulte_kodu], 
+    [Fakulte_Bolum].[bolum_kodu] AS [bolum_kodu]
+    FROM [dbo].[Fakulte_Bolum] AS [Fakulte_Bolum]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Ogrenci_Ders" EntityType="Self.Ogrenci_Ders" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Ogrenci_Ders].[ogr_no] AS [ogr_no], 
+    [Ogrenci_Ders].[ders_kodu] AS [ders_kodu], 
+    [Ogrenci_Ders].[grubu] AS [grubu], 
+    [Ogrenci_Ders].[ders_adi] AS [ders_adi]
+    FROM [dbo].[Ogrenci_Ders] AS [Ogrenci_Ders]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="fk_acan_bolum_kodu" Association="Self.fk_acan_bolum_kodu">
+            <End Role="Bolumler" EntitySet="Bolumler" />
+            <End Role="Ders_Detaylari" EntitySet="Ders_Detaylari" />
+          </AssociationSet>
+          <AssociationSet Name="fk_blm_kodu" Association="Self.fk_blm_kodu">
+            <End Role="Bolumler" EntitySet="Bolumler" />
+            <End Role="Ogrenciler" EntitySet="Ogrenciler" />
+          </AssociationSet>
+          <AssociationSet Name="fk_bol_kodu" Association="Self.fk_bol_kodu">
+            <End Role="Bolumler" EntitySet="Bolumler" />
+            <End Role="Hocalar" EntitySet="Hocalar" />
+          </AssociationSet>
+          <AssociationSet Name="fk_bolum_kodu" Association="Self.fk_bolum_kodu">
+            <End Role="Bolumler" EntitySet="Bolumler" />
+            <End Role="Fakulte_Bolum" EntitySet="Fakulte_Bolum" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ders_kodu" Association="Self.fk_ders_kodu">
+            <End Role="Ders_Detaylari" EntitySet="Ders_Detaylari" />
+            <End Role="Dersler" EntitySet="Dersler" />
+          </AssociationSet>
+          <AssociationSet Name="fk_drs_kodu" Association="Self.fk_drs_kodu">
+            <End Role="Ders_Detaylari" EntitySet="Ders_Detaylari" />
+            <End Role="Ogrenci_Ders" EntitySet="Ogrenci_Ders" />
+          </AssociationSet>
+          <AssociationSet Name="fk_fakulte_kodu" Association="Self.fk_fakulte_kodu">
+            <End Role="Fakulteler" EntitySet="Fakulteler" />
+            <End Role="Fakulte_Bolum" EntitySet="Fakulte_Bolum" />
+          </AssociationSet>
+          <AssociationSet Name="fk_hoca_kodu" Association="Self.fk_hoca_kodu">
+            <End Role="Hocalar" EntitySet="Hocalar" />
+            <End Role="Dersler" EntitySet="Dersler" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ogr_no" Association="Self.fk_ogr_no">
+            <End Role="Ogrenciler" EntitySet="Ogrenciler" />
+            <End Role="Ogrenci_Ders" EntitySet="Ogrenci_Ders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SysProgDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Bolumler">
+          <Key>
+            <PropertyRef Name="bolum_kodu" />
+          </Key>
+          <Property Name="bolum_kodu" Type="Int32" Nullable="false" />
+          <Property Name="bolum_adi" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Ders_Detaylari" Relationship="Self.fk_acan_bolum_kodu" FromRole="Bolumler" ToRole="Ders_Detaylari" />
+          <NavigationProperty Name="Ogrenciler" Relationship="Self.fk_blm_kodu" FromRole="Bolumler" ToRole="Ogrenciler" />
+          <NavigationProperty Name="Hocalar" Relationship="Self.fk_bol_kodu" FromRole="Bolumler" ToRole="Hocalar" />
+          <NavigationProperty Name="Fakulteler" Relationship="Self.Fakulte_Bolum" FromRole="Bolumler" ToRole="Fakulteler" />
+        </EntityType>
+        <EntityType Name="Ders_Detaylari">
+          <Key>
+            <PropertyRef Name="ders_kodu" />
+          </Key>
+          <Property Name="ders_kodu" Type="Int32" Nullable="false" />
+          <Property Name="ders_adi" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="teori" Type="Int32" />
+          <Property Name="pratik" Type="Int32" />
+          <Property Name="lab" Type="Int32" />
+          <Property Name="toplam_kredi" Type="Int32" />
+          <Property Name="acan_bolum_kodu" Type="Int32" />
+          <NavigationProperty Name="Bolumler" Relationship="Self.fk_acan_bolum_kodu" FromRole="Ders_Detaylari" ToRole="Bolumler" />
+          <NavigationProperty Name="Dersler" Relationship="Self.fk_ders_kodu" FromRole="Ders_Detaylari" ToRole="Dersler" />
+          <NavigationProperty Name="Ogrenci_Ders" Relationship="Self.fk_drs_kodu" FromRole="Ders_Detaylari" ToRole="Ogrenci_Ders" />
+        </EntityType>
+        <EntityType Name="Fakulteler">
+          <Key>
+            <PropertyRef Name="fakulte_kodu" />
+          </Key>
+          <Property Name="fakulte_kodu" Type="Int32" Nullable="false" />
+          <Property Name="fakulte_adı" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Bolumler" Relationship="Self.Fakulte_Bolum" FromRole="Fakulteler" ToRole="Bolumler" />
+        </EntityType>
+        <EntityType Name="Hocalar">
+          <Key>
+            <PropertyRef Name="hoca_kodu" />
+          </Key>
+          <Property Name="hoca_kodu" Type="Int32" Nullable="false" />
+          <Property Name="adi" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="soyadi" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="bolum_kodu" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Bolumler" Relationship="Self.fk_bol_kodu" FromRole="Hocalar" ToRole="Bolumler" />
+          <NavigationProperty Name="Dersler" Relationship="Self.fk_hoca_kodu" FromRole="Hocalar" ToRole="Dersler" />
+        </EntityType>
+        <EntityType Name="Ogrenciler">
+          <Key>
+            <PropertyRef Name="ogr_no" />
+          </Key>
+          <Property Name="ogr_no" Type="Int32" Nullable="false" />
+          <Property Name="adi" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="soyadi" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="bolum_kodu" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Bolumler" Relationship="Self.fk_blm_kodu" FromRole="Ogrenciler" ToRole="Bolumler" />
+          <NavigationProperty Name="Ogrenci_Ders" Relationship="Self.fk_ogr_no" FromRole="Ogrenciler" ToRole="Ogrenci_Ders" />
+        </EntityType>
+        <EntityType Name="Dersler">
+          <Key>
+            <PropertyRef Name="grup_no" />
+            <PropertyRef Name="dersin_adi" />
+          </Key>
+          <Property Name="ders_kodu" Type="Int32" />
+          <Property Name="grup_no" Type="Int32" Nullable="false" />
+          <Property Name="dersin_adi" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="hoca_kodu" Type="Int32" />
+          <NavigationProperty Name="Ders_Detaylari" Relationship="Self.fk_ders_kodu" FromRole="Dersler" ToRole="Ders_Detaylari" />
+          <NavigationProperty Name="Hocalar" Relationship="Self.fk_hoca_kodu" FromRole="Dersler" ToRole="Hocalar" />
+        </EntityType>
+        <EntityType Name="Ogrenci_Ders">
+          <Key>
+            <PropertyRef Name="ogr_no" />
+            <PropertyRef Name="ders_kodu" />
+            <PropertyRef Name="grubu" />
+          </Key>
+          <Property Name="ogr_no" Type="Int32" Nullable="false" />
+          <Property Name="ders_kodu" Type="Int32" Nullable="false" />
+          <Property Name="grubu" Type="Int32" Nullable="false" />
+          <Property Name="ders_adi" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Ders_Detaylari" Relationship="Self.fk_drs_kodu" FromRole="Ogrenci_Ders" ToRole="Ders_Detaylari" />
+          <NavigationProperty Name="Ogrenciler" Relationship="Self.fk_ogr_no" FromRole="Ogrenci_Ders" ToRole="Ogrenciler" />
+        </EntityType>
+        <Association Name="fk_acan_bolum_kodu">
+          <End Role="Bolumler" Type="Self.Bolumler" Multiplicity="0..1" />
+          <End Role="Ders_Detaylari" Type="Self.Ders_Detaylari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bolumler">
+              <PropertyRef Name="bolum_kodu" />
+            </Principal>
+            <Dependent Role="Ders_Detaylari">
+              <PropertyRef Name="acan_bolum_kodu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_blm_kodu">
+          <End Role="Bolumler" Type="Self.Bolumler" Multiplicity="1" />
+          <End Role="Ogrenciler" Type="Self.Ogrenciler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bolumler">
+              <PropertyRef Name="bolum_kodu" />
+            </Principal>
+            <Dependent Role="Ogrenciler">
+              <PropertyRef Name="bolum_kodu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_bol_kodu">
+          <End Role="Bolumler" Type="Self.Bolumler" Multiplicity="1" />
+          <End Role="Hocalar" Type="Self.Hocalar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bolumler">
+              <PropertyRef Name="bolum_kodu" />
+            </Principal>
+            <Dependent Role="Hocalar">
+              <PropertyRef Name="bolum_kodu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ders_kodu">
+          <End Role="Ders_Detaylari" Type="Self.Ders_Detaylari" Multiplicity="0..1" />
+          <End Role="Dersler" Type="Self.Dersler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ders_Detaylari">
+              <PropertyRef Name="ders_kodu" />
+            </Principal>
+            <Dependent Role="Dersler">
+              <PropertyRef Name="ders_kodu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_drs_kodu">
+          <End Role="Ders_Detaylari" Type="Self.Ders_Detaylari" Multiplicity="1" />
+          <End Role="Ogrenci_Ders" Type="Self.Ogrenci_Ders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ders_Detaylari">
+              <PropertyRef Name="ders_kodu" />
+            </Principal>
+            <Dependent Role="Ogrenci_Ders">
+              <PropertyRef Name="ders_kodu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_hoca_kodu">
+          <End Role="Hocalar" Type="Self.Hocalar" Multiplicity="0..1" />
+          <End Role="Dersler" Type="Self.Dersler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hocalar">
+              <PropertyRef Name="hoca_kodu" />
+            </Principal>
+            <Dependent Role="Dersler">
+              <PropertyRef Name="hoca_kodu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ogr_no">
+          <End Role="Ogrenciler" Type="Self.Ogrenciler" Multiplicity="1" />
+          <End Role="Ogrenci_Ders" Type="Self.Ogrenci_Ders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ogrenciler">
+              <PropertyRef Name="ogr_no" />
+            </Principal>
+            <Dependent Role="Ogrenci_Ders">
+              <PropertyRef Name="ogr_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fakulte_Bolum">
+          <End Role="Bolumler" Type="Self.Bolumler" Multiplicity="*" />
+          <End Role="Fakulteler" Type="Self.Fakulteler" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="SysProgDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bolumler" EntityType="Self.Bolumler" />
+          <EntitySet Name="Ders_Detaylari" EntityType="Self.Ders_Detaylari" />
+          <EntitySet Name="Fakulteler" EntityType="Self.Fakulteler" />
+          <EntitySet Name="Hocalar" EntityType="Self.Hocalar" />
+          <EntitySet Name="Ogrenciler" EntityType="Self.Ogrenciler" />
+          <EntitySet Name="Dersler" EntityType="Self.Dersler" />
+          <EntitySet Name="Ogrenci_Ders" EntityType="Self.Ogrenci_Ders" />
+          <AssociationSet Name="fk_acan_bolum_kodu" Association="Self.fk_acan_bolum_kodu">
+            <End Role="Bolumler" EntitySet="Bolumler" />
+            <End Role="Ders_Detaylari" EntitySet="Ders_Detaylari" />
+          </AssociationSet>
+          <AssociationSet Name="fk_blm_kodu" Association="Self.fk_blm_kodu">
+            <End Role="Bolumler" EntitySet="Bolumler" />
+            <End Role="Ogrenciler" EntitySet="Ogrenciler" />
+          </AssociationSet>
+          <AssociationSet Name="fk_bol_kodu" Association="Self.fk_bol_kodu">
+            <End Role="Bolumler" EntitySet="Bolumler" />
+            <End Role="Hocalar" EntitySet="Hocalar" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ders_kodu" Association="Self.fk_ders_kodu">
+            <End Role="Ders_Detaylari" EntitySet="Ders_Detaylari" />
+            <End Role="Dersler" EntitySet="Dersler" />
+          </AssociationSet>
+          <AssociationSet Name="fk_drs_kodu" Association="Self.fk_drs_kodu">
+            <End Role="Ders_Detaylari" EntitySet="Ders_Detaylari" />
+            <End Role="Ogrenci_Ders" EntitySet="Ogrenci_Ders" />
+          </AssociationSet>
+          <AssociationSet Name="fk_hoca_kodu" Association="Self.fk_hoca_kodu">
+            <End Role="Hocalar" EntitySet="Hocalar" />
+            <End Role="Dersler" EntitySet="Dersler" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ogr_no" Association="Self.fk_ogr_no">
+            <End Role="Ogrenciler" EntitySet="Ogrenciler" />
+            <End Role="Ogrenci_Ders" EntitySet="Ogrenci_Ders" />
+          </AssociationSet>
+          <AssociationSet Name="Fakulte_Bolum" Association="Self.Fakulte_Bolum">
+            <End Role="Bolumler" EntitySet="Bolumler" />
+            <End Role="Fakulteler" EntitySet="Fakulteler" />
+          </AssociationSet>
+          <EntitySet Name="users" EntityType="SysProgDbModel.users" />
+        </EntityContainer>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="role" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SysProgDbModelStoreContainer" CdmEntityContainer="SysProgDbEntities">
+          <EntitySetMapping Name="Bolumler">
+            <EntityTypeMapping TypeName="SysProgDbModel.Bolumler">
+              <MappingFragment StoreEntitySet="Bolumler">
+                <ScalarProperty Name="bolum_kodu" ColumnName="bolum_kodu" />
+                <ScalarProperty Name="bolum_adi" ColumnName="bolum_adi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ders_Detaylari">
+            <EntityTypeMapping TypeName="SysProgDbModel.Ders_Detaylari">
+              <MappingFragment StoreEntitySet="Ders_Detaylari">
+                <ScalarProperty Name="ders_kodu" ColumnName="ders_kodu" />
+                <ScalarProperty Name="ders_adi" ColumnName="ders_adi" />
+                <ScalarProperty Name="teori" ColumnName="teori" />
+                <ScalarProperty Name="pratik" ColumnName="pratik" />
+                <ScalarProperty Name="lab" ColumnName="lab" />
+                <ScalarProperty Name="toplam_kredi" ColumnName="toplam_kredi" />
+                <ScalarProperty Name="acan_bolum_kodu" ColumnName="acan_bolum_kodu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fakulteler">
+            <EntityTypeMapping TypeName="SysProgDbModel.Fakulteler">
+              <MappingFragment StoreEntitySet="Fakulteler">
+                <ScalarProperty Name="fakulte_kodu" ColumnName="fakulte_kodu" />
+                <ScalarProperty Name="fakulte_adı" ColumnName="fakulte_adı" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hocalar">
+            <EntityTypeMapping TypeName="SysProgDbModel.Hocalar">
+              <MappingFragment StoreEntitySet="Hocalar">
+                <ScalarProperty Name="hoca_kodu" ColumnName="hoca_kodu" />
+                <ScalarProperty Name="adi" ColumnName="adi" />
+                <ScalarProperty Name="soyadi" ColumnName="soyadi" />
+                <ScalarProperty Name="bolum_kodu" ColumnName="bolum_kodu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ogrenciler">
+            <EntityTypeMapping TypeName="SysProgDbModel.Ogrenciler">
+              <MappingFragment StoreEntitySet="Ogrenciler">
+                <ScalarProperty Name="ogr_no" ColumnName="ogr_no" />
+                <ScalarProperty Name="adi" ColumnName="adi" />
+                <ScalarProperty Name="soyadi" ColumnName="soyadi" />
+                <ScalarProperty Name="bolum_kodu" ColumnName="bolum_kodu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dersler">
+            <EntityTypeMapping TypeName="SysProgDbModel.Dersler">
+              <MappingFragment StoreEntitySet="Dersler">
+                <ScalarProperty Name="ders_kodu" ColumnName="ders_kodu" />
+                <ScalarProperty Name="grup_no" ColumnName="grup_no" />
+                <ScalarProperty Name="dersin_adi" ColumnName="dersin_adi" />
+                <ScalarProperty Name="hoca_kodu" ColumnName="hoca_kodu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ogrenci_Ders">
+            <EntityTypeMapping TypeName="SysProgDbModel.Ogrenci_Ders">
+              <MappingFragment StoreEntitySet="Ogrenci_Ders">
+                <ScalarProperty Name="ogr_no" ColumnName="ogr_no" />
+                <ScalarProperty Name="ders_kodu" ColumnName="ders_kodu" />
+                <ScalarProperty Name="grubu" ColumnName="grubu" />
+                <ScalarProperty Name="ders_adi" ColumnName="ders_adi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Fakulte_Bolum" TypeName="SysProgDbModel.Fakulte_Bolum" StoreEntitySet="Fakulte_Bolum">
+            <EndProperty Name="Bolumler">
+              <ScalarProperty Name="bolum_kodu" ColumnName="bolum_kodu" />
+            </EndProperty>
+            <EndProperty Name="Fakulteler">
+              <ScalarProperty Name="fakulte_kodu" ColumnName="fakulte_kodu" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="SysProgDbModel.users">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

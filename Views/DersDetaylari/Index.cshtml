@@ -1,0 +1,76 @@
+﻿@model IEnumerable<SysProgAnket3.Models.Ders_Detaylari>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<body>
+    <h2>Açılan Dersler</h2>
+
+    <p>
+        @Html.ActionLink("Yeni Ders Ekle", "Create")
+    </p>
+    <table class="table table-bordered" id="derstable">
+        <thead>
+            <tr>
+                <th>
+                    Ders Adı
+                </th>
+                <th>
+                    Teori
+                </th>
+                <th>
+                    Pratik
+                </th>
+                <th>
+                    Lab
+                </th>
+                <th>
+                    Toplam Kredi
+                </th>
+                <th>
+                    Bölüm Adı
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ders_adi)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.teori)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.pratik)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.lab)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.toplam_kredi)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Bolumler.bolum_adi)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Düzenle", "Edit", new { id = item.ders_kodu }) |
+                        @Html.ActionLink("Detaylar", "Details", new { id = item.ders_kodu }) |
+                        @Html.ActionLink("Sil", "Delete", new { id = item.ders_kodu })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+    <script>
+  $(function(){
+    $("#derstable").dataTable();
+  })
+    </script>
+</body>
+

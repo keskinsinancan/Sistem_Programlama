@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SysProgDbModelStoreContainer" CdmEntityContainer="SysProgDbEntities">
+    <EntitySetMapping Name="Bolumler">
+      <EntityTypeMapping TypeName="SysProgDbModel.Bolumler">
+        <MappingFragment StoreEntitySet="Bolumler">
+          <ScalarProperty Name="bolum_kodu" ColumnName="bolum_kodu" />
+          <ScalarProperty Name="bolum_adi" ColumnName="bolum_adi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ders_Detaylari">
+      <EntityTypeMapping TypeName="SysProgDbModel.Ders_Detaylari">
+        <MappingFragment StoreEntitySet="Ders_Detaylari">
+          <ScalarProperty Name="ders_kodu" ColumnName="ders_kodu" />
+          <ScalarProperty Name="ders_adi" ColumnName="ders_adi" />
+          <ScalarProperty Name="teori" ColumnName="teori" />
+          <ScalarProperty Name="pratik" ColumnName="pratik" />
+          <ScalarProperty Name="lab" ColumnName="lab" />
+          <ScalarProperty Name="toplam_kredi" ColumnName="toplam_kredi" />
+          <ScalarProperty Name="acan_bolum_kodu" ColumnName="acan_bolum_kodu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Fakulteler">
+      <EntityTypeMapping TypeName="SysProgDbModel.Fakulteler">
+        <MappingFragment StoreEntitySet="Fakulteler">
+          <ScalarProperty Name="fakulte_kodu" ColumnName="fakulte_kodu" />
+          <ScalarProperty Name="fakulte_adı" ColumnName="fakulte_adı" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Hocalar">
+      <EntityTypeMapping TypeName="SysProgDbModel.Hocalar">
+        <MappingFragment StoreEntitySet="Hocalar">
+          <ScalarProperty Name="hoca_kodu" ColumnName="hoca_kodu" />
+          <ScalarProperty Name="adi" ColumnName="adi" />
+          <ScalarProperty Name="soyadi" ColumnName="soyadi" />
+          <ScalarProperty Name="bolum_kodu" ColumnName="bolum_kodu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ogrenciler">
+      <EntityTypeMapping TypeName="SysProgDbModel.Ogrenciler">
+        <MappingFragment StoreEntitySet="Ogrenciler">
+          <ScalarProperty Name="ogr_no" ColumnName="ogr_no" />
+          <ScalarProperty Name="adi" ColumnName="adi" />
+          <ScalarProperty Name="soyadi" ColumnName="soyadi" />
+          <ScalarProperty Name="bolum_kodu" ColumnName="bolum_kodu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Dersler">
+      <EntityTypeMapping TypeName="SysProgDbModel.Dersler">
+        <MappingFragment StoreEntitySet="Dersler">
+          <ScalarProperty Name="ders_kodu" ColumnName="ders_kodu" />
+          <ScalarProperty Name="grup_no" ColumnName="grup_no" />
+          <ScalarProperty Name="dersin_adi" ColumnName="dersin_adi" />
+          <ScalarProperty Name="hoca_kodu" ColumnName="hoca_kodu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ogrenci_Ders">
+      <EntityTypeMapping TypeName="SysProgDbModel.Ogrenci_Ders">
+        <MappingFragment StoreEntitySet="Ogrenci_Ders">
+          <ScalarProperty Name="ogr_no" ColumnName="ogr_no" />
+          <ScalarProperty Name="ders_kodu" ColumnName="ders_kodu" />
+          <ScalarProperty Name="grubu" ColumnName="grubu" />
+          <ScalarProperty Name="ders_adi" ColumnName="ders_adi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Fakulte_Bolum" TypeName="SysProgDbModel.Fakulte_Bolum" StoreEntitySet="Fakulte_Bolum">
+      <EndProperty Name="Bolumler">
+        <ScalarProperty Name="bolum_kodu" ColumnName="bolum_kodu" />
+      </EndProperty>
+      <EndProperty Name="Fakulteler">
+        <ScalarProperty Name="fakulte_kodu" ColumnName="fakulte_kodu" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="SysProgDbModel.users">
+        <MappingFragment StoreEntitySet="users">
+          <ScalarProperty Name="role" ColumnName="role" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

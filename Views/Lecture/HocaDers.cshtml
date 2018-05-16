@@ -1,0 +1,44 @@
+﻿@using SysProgAnket3.Models
+@model List<Dersler>
+@{
+    ViewBag.Title = "HocaDers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Verilen Dersler</h1>
+@if (Model != null)
+{
+<table class="table table-bordered table-light">
+    <thead>
+        <tr>
+            <th>Ders Kodu</th>
+            <th>Ders Adı</th>
+            <th>Grubu</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var drs in Model)
+        {
+        <tr>
+            <td>@drs.ders_kodu</td>
+            <td>@drs.dersin_adi</td>
+            <td>@drs.grup_no</td>
+
+            <td>
+                <a class="btn btn-outline-info" href="#">Ankete Git</a>
+            </td>
+            <td>
+                <a class="btn btn-outline-info" href="#">Ders Detayları</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+}
+else
+{
+    <div>
+        Verilen ders bulunmamaktadır
+    </div>
+}
+

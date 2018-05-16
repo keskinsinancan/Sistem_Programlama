@@ -1,0 +1,48 @@
+﻿@model SysProgAnket3.Models.Hocalar
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Öğretmeni silmek istediğinize emin misiniz?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Adı
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.adi)
+        </dd>
+
+        <dt>
+            Soyadı
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.soyadi)
+        </dd>
+        <dt>
+            Kodu
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.hoca_kodu)
+        </dd>
+        <dt>
+            Bölümü
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Bolumler.bolum_adi)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Sil" class="btn btn-danger" /> |
+            @Html.ActionLink("Listeye Dön", "Index")
+        </div>
+    }
+</div>

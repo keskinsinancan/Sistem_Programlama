@@ -1,0 +1,48 @@
+﻿@model SysProgAnket3.Models.Ogrenciler
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Öğrenci Detayları</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Numarası
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ogr_no)
+        </dd>
+        <dt>
+            Adı
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.adi)
+        </dd>
+
+        <dt>
+            Soyadı
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.soyadi)
+        </dd>
+
+        <dt>
+            Bölümü
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bolumler.bolum_adi)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Düzenle", "Edit", new { id = Model.ogr_no }) |
+    @Html.ActionLink("Lsteye Dön", "Index")
+</p>

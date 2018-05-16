@@ -1,0 +1,128 @@
+﻿@using SysProgAnket3.Models;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
+    <title>Sistem Programlama Anket</title>
+</head>
+<body>
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar navbar-brand">Anket Sistemi</a>
+        </div>
+        <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd">
+            <a class="navbar-brand" href="/Home/Index">Ana Sayfa</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                    @if (HttpContext.Current.User.IsInRole("student"))
+                    {
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/Lecture/AlinanDersler">Alınan Dersler <span class="sr-only">(current)</span></a>
+                        </li>
+                    }
+                    @if (HttpContext.Current.User.IsInRole("student") || HttpContext.Current.User.IsInRole("lecturer"))
+                    {
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Anket/Index">Anketlerim</a>
+                        </li>
+                    }
+                    @if (HttpContext.Current.User.IsInRole("admin"))
+                    {
+                        <li class="dropdown">
+                            <button class="btn dropdown-toggle btn-link " type="button" id="adminDropDown1" data-toggle="dropdown"
+                                    style="background-color: #e3f2fd" aria-haspopup="true" aria-expanded="false">
+                                Anket Yönetimi
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="adminDropDown1">
+                                <a class="nav-link" href="#">Anket Yaratma</a>
+                                <a class="nav-link" href="#">Anket Silme</a>
+                                <a class="nav-link" href="#">Anket Düzenleme</a>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <button class="btn dropdown-toggle btn-link " type="button" id="adminDropDown1" data-toggle="dropdown"
+                                    style="background-color: #e3f2fd" aria-haspopup="true" aria-expanded="false">
+                                Ders Yönetimi
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="adminDropDown1">
+                                <a class="nav-link" href="/DersDetaylari/Index">Dersleri Görüntüleme</a>
+                                <a class="nav-link" href="/DersDetaylari/Create">Ders Ekleme</a>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <button class="btn dropdown-toggle btn-link " type="button" id="adminDropDown1" data-toggle="dropdown"
+                                    style="background-color: #e3f2fd" aria-haspopup="true" aria-expanded="false">
+                                Öğrenci İşlemleri
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="adminDropDown1">
+                                <a class="nav-link" href="/student/index">Öğrenci Listesi</a>
+                                <a class="nav-link" href="/student/create">Öğrenci Ekleme</a>
+                                <a class="nav-link" href="/ogrenciders/index">Öğrencilerin Aldığı Dersler</a>
+                                <a class="nav-link" href="/ogrenciders/create">Öğrenciye Ders Tanımlama</a>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <button class="btn dropdown-toggle btn-link " type="button" id="adminDropDown1" data-toggle="dropdown"
+                                    style="background-color: #e3f2fd" aria-haspopup="true" aria-expanded="false">
+                                Öğretmen İşlemleri
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="adminDropDown1">
+                                <a class="nav-link" href="/lecturer/index">Öğretmen Listesi</a>
+                                <a class="nav-link" href="/lecturer/create">Öğretmen Ekleme</a>
+                                <a class="nav-link" href="#">Öğretmene Ders Ekleme</a>
+                                <a class="nav-link" href="#">Öğretmenden Ders Silme</a>
+                            </div>
+                        </li>
+
+                        <li class="dropdown">
+                            <button class="btn dropdown-toggle btn-link " type="button" id="adminDropDown1" data-toggle="dropdown"
+                                    style="background-color: #e3f2fd" aria-haspopup="true" aria-expanded="false">
+                                Dönemlik İşlemler
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="adminDropDown1">
+                                <a class="nav-link" href="#">Öğrenci Listesi Yükleme</a>
+                                <a class="nav-link" href="#">Ders Detayları Yükleme</a>
+                                <a class="nav-link" href="#">Ders Listesi Yükleme</a>
+                                <a class="nav-link" href="#">Öğretmen Listesi Yükleme</a>
+                                <a class="nav-link" href="#">Alınan Dersleri Yükleme</a>
+                            </div>
+                        </li>
+                    }
+                    @if (HttpContext.Current.User.IsInRole("lecturer"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Lecture/VerilenDersler">Verilen Dersler</a>
+                        </li>
+                    }
+                </ul>
+                <div class="navbar-right">
+                    Merhaba @HttpContext.Current.User.Identity.Name &ensp;
+                    <a href="/Account/Logout"> Çıkış</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Yıldız Teknik Üniversitesi</p>
+        </footer>
+    </div>
+    <script src="~/Scripts/jquery-3.0.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+﻿@model SysProgAnket3.Models.Ogrenci_Ders
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Ogrenci_Ders</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ders_adi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ders_adi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ders_Detaylari.ders_adi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ders_Detaylari.ders_adi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ogrenciler.adi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ogrenciler.adi)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

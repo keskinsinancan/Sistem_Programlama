@@ -1,0 +1,42 @@
+﻿@using SysProgAnket3.Models
+@model SysProgAnket3.Models.LoginModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="~/CSS/Login.css" rel="stylesheet" />
+</head>
+<body>
+    <script src="https://use.typekit.net/ayg4pcz.js"></script>
+    <script>try { Typekit.load({ async: true }); } catch (e) { }</script>
+    <div class="container">
+        <h1 class="welcome text-center">Yıldız Teknik Üniversitesi <br> Anket Sistemi</h1>
+        <div class="card card-container">
+            <h2 class='login_title text-center'>Giriş Yapınız</h2>
+            <hr>
+            <form class="form-signin" method="post">
+                <input type="text" name="username" class="login_box" placeholder="Kullanıcı Adı" />
+                <input type="password" name="password" class="login_box" placeholder="Şifre" />
+                <div id="remember" class="checkbox">
+                    <label>
+                        <label>
+                            <input type="checkbox"> Beni hatırla
+                        </label>
+                    </label>
+                </div>
+                @ViewBag.message
+                <button class="btn btn-lg btn-primary" type="submit">Giriş Yap</button>
+            </form><!-- /form -->
+        </div><!-- /card-container -->
+    </div><!-- /container -->
+</body>
+</html>
