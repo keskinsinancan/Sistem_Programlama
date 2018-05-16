@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+//this is home controller
 namespace SysProgAnket3.Controllers
 {
     [Authorize]
