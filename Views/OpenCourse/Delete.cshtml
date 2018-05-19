@@ -1,0 +1,57 @@
+﻿@model SysProgAnket3.Models.Dersler
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h3>Bu grubu silmek istediğinize emin misiniz ?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Dersin Adı
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dersin_adi)
+        </dd>
+
+        <dt>
+            Grubu
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.grup_no)
+        </dd>
+
+        <dt>
+            Yürütücü
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hocalar.adi)
+            @Html.DisplayFor(model => model.Hocalar.soyadi)
+
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hocalar.adi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hocalar.adi)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Sil" class="btn btn-danger" /> |
+            @Html.ActionLink("Listeye Dön", "Index")
+        </div>
+    }
+</div>

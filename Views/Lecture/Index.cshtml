@@ -1,40 +1,49 @@
 ﻿@using SysProgAnket3.Models
 @model List<Ogrenci_Ders>
 @{
-                /**/
+    /**/
 
-                ViewBag.Title = "Lectures";
-                Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Lectures";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Alınan Dersler</h1>
-<table class="table table-bordered table-light">
-    <thead>
-        <tr>
-            <th>Ders Kodu</th>
-            <th>Ders Adı</th>
-            <th>Grubu</th>
-            <th></th>
-            <th>Anket Durumu</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var drs in Model)
-        {
-        <tr>
-            <td>@drs.ders_kodu</td>
-            <td>@drs.ders_adi</td>
-            <td>@drs.grubu</td>
-            <td>
-                <a class="btn btn-outline-info" href="/Anket/index">Ankete Git</a>
-            </td>
-            <td>
-                Bekliyor
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
+<body>
+    <h1>Alınan Dersler</h1>
+    <table class="table table-bordered" id="alinanDersler">
+        <thead>
+            <tr>
+                <th>Ders Kodu</th>
+                <th>Ders Adı</th>
+                <th>Grubu</th>
+                <th></th>
+                <th>Anket Durumu</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var drs in Model)
+            {
+                <tr>
+                    <td>@drs.ders_kodu</td>
+                    <td>@drs.ders_adi</td>
+                    <td>@drs.grubu</td>
+                    <td>
+                        <a class="btn btn-outline-info" href="/Anket/index">Ankete Git</a>
+                    </td>
+                    <td>
+                        Bekliyor
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+    <script>
+        $(function () {
+            $("#alinanDersler").dataTable();
+        })
+    </script>
+</body>
 
 
 

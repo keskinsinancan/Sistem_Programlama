@@ -1,0 +1,72 @@
+﻿@model IEnumerable<SysProgAnket3.Models.Ogrenci_Ders>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Öğrencilerin Aldığı Dersler</h2>
+
+<p>
+    @Html.ActionLink("Öğrenciye Ders Tanımla", "Create")
+</p>
+<table class="table table-bordered" id="stdCourseTable">
+    <thead>
+        <tr>
+            <th>
+                Öğrenci Numarası
+            </th>
+            <th>
+                Adı
+            </th>
+            <th>
+                Soyadı
+            </th>
+            <th>
+                Ders Adı
+            </th>
+            <th>
+                Ders Kodu
+            </th>
+            <th>
+                Grubu
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ogrenciler.ogr_no)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ogrenciler.adi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ogrenciler.soyadi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ders_Detaylari.ders_adi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ders_Detaylari.ders_kodu)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.grubu)
+                </td>
+                <td>
+                    @Html.ActionLink("Sil", "Delete", new { id = item.id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+<script>
+    $(function () {
+        $("#stdCourseTable").dataTable();
+    })
+</script>

@@ -1,3 +1,9 @@
+C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\roslyn\System.IO.Compression.dll
+C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\roslyn\VBCSCompiler.exe
 C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\SysProgAnket3.dll.config
 C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\SysProgAnket3.dll
 C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\SysProgAnket3.pdb
@@ -8,13 +14,9 @@ C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\roslyn\csi.exe
 C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\roslyn\csi.exe.config
 C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\roslyn\csi.rsp
 C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
-C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
 C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
-C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\roslyn\Microsoft.CodeAnalysis.dll
 C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
-C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
 C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\roslyn\Microsoft.CSharp.Core.targets
-C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
 C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
 C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\roslyn\Microsoft.VisualBasic.Core.targets
 C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\roslyn\Microsoft.Win32.Primitives.dll
@@ -24,7 +26,6 @@ C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\roslyn\System.Console.dll
 C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
 C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\roslyn\System.Diagnostics.Process.dll
 C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\roslyn\System.Diagnostics.StackTrace.dll
-C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\roslyn\System.IO.Compression.dll
 C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\roslyn\System.IO.FileSystem.dll
 C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\roslyn\System.IO.FileSystem.DriveInfo.dll
 C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\roslyn\System.IO.FileSystem.Primitives.dll
@@ -47,7 +48,6 @@ C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\roslyn\System.Xml.XPath.XDocument.
 C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\roslyn\vbc.exe
 C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\roslyn\vbc.exe.config
 C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\roslyn\vbc.rsp
-C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\roslyn\VBCSCompiler.exe
 C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\roslyn\VBCSCompiler.exe.config
 C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\EntityFramework.dll
 C:\Projects_2\SysProgAnket3\SysProgAnket3\bin\EntityFramework.SqlServer.dll
@@ -72,3 +72,4 @@ C:\Projects_2\SysProgAnket3\SysProgAnket3\obj\Debug\SysProgAnket3.csproj.CoreCom
 C:\Projects_2\SysProgAnket3\SysProgAnket3\obj\Debug\SysProgAnket3.csproj.CopyComplete
 C:\Projects_2\SysProgAnket3\SysProgAnket3\obj\Debug\SysProgAnket3.dll
 C:\Projects_2\SysProgAnket3\SysProgAnket3\obj\Debug\SysProgAnket3.pdb
+C:\Projects_2\SysProgAnket3\SysProgAnket3\obj\Debug\SysProgAnket3.csprojAssemblyReference.cache

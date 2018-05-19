@@ -14,6 +14,7 @@ namespace SysProgAnket3.Models
     
     public partial class Ogrenci_Ders
     {
+        public int id { get; set; }
         public int ogr_no { get; set; }
         public int ders_kodu { get; set; }
         public int grubu { get; set; }

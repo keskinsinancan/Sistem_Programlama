@@ -22,6 +22,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Dersler">
+      <EntityTypeMapping TypeName="SysProgDbModel.Dersler">
+        <MappingFragment StoreEntitySet="Dersler">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="ders_kodu" ColumnName="ders_kodu" />
+          <ScalarProperty Name="grup_no" ColumnName="grup_no" />
+          <ScalarProperty Name="dersin_adi" ColumnName="dersin_adi" />
+          <ScalarProperty Name="hoca_kodu" ColumnName="hoca_kodu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Fakulteler">
       <EntityTypeMapping TypeName="SysProgDbModel.Fakulteler">
         <MappingFragment StoreEntitySet="Fakulteler">
@@ -40,26 +51,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Ogrenciler">
-      <EntityTypeMapping TypeName="SysProgDbModel.Ogrenciler">
-        <MappingFragment StoreEntitySet="Ogrenciler">
-          <ScalarProperty Name="ogr_no" ColumnName="ogr_no" />
-          <ScalarProperty Name="adi" ColumnName="adi" />
-          <ScalarProperty Name="soyadi" ColumnName="soyadi" />
-          <ScalarProperty Name="bolum_kodu" ColumnName="bolum_kodu" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Dersler">
-      <EntityTypeMapping TypeName="SysProgDbModel.Dersler">
-        <MappingFragment StoreEntitySet="Dersler">
-          <ScalarProperty Name="ders_kodu" ColumnName="ders_kodu" />
-          <ScalarProperty Name="grup_no" ColumnName="grup_no" />
-          <ScalarProperty Name="dersin_adi" ColumnName="dersin_adi" />
-          <ScalarProperty Name="hoca_kodu" ColumnName="hoca_kodu" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Ogrenci_Ders">
       <EntityTypeMapping TypeName="SysProgDbModel.Ogrenci_Ders">
         <MappingFragment StoreEntitySet="Ogrenci_Ders">
@@ -71,6 +62,27 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Ogrenciler">
+      <EntityTypeMapping TypeName="SysProgDbModel.Ogrenciler">
+        <MappingFragment StoreEntitySet="Ogrenciler">
+          <ScalarProperty Name="ogr_no" ColumnName="ogr_no" />
+          <ScalarProperty Name="adi" ColumnName="adi" />
+          <ScalarProperty Name="soyadi" ColumnName="soyadi" />
+          <ScalarProperty Name="bolum_kodu" ColumnName="bolum_kodu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="SysProgDbModel.users">
+        <MappingFragment StoreEntitySet="users">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="role" ColumnName="role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="Fakulte_Bolum" TypeName="SysProgDbModel.Fakulte_Bolum" StoreEntitySet="Fakulte_Bolum">
       <EndProperty Name="Bolumler">
         <ScalarProperty Name="bolum_kodu" ColumnName="bolum_kodu" />
@@ -79,16 +91,5 @@
         <ScalarProperty Name="fakulte_kodu" ColumnName="fakulte_kodu" />
       </EndProperty>
     </AssociationSetMapping>
-    <EntitySetMapping Name="users">
-      <EntityTypeMapping TypeName="SysProgDbModel.users">
-        <MappingFragment StoreEntitySet="users">
-          <ScalarProperty Name="role" ColumnName="role" />
-          <ScalarProperty Name="email" ColumnName="email" />
-          <ScalarProperty Name="password" ColumnName="password" />
-          <ScalarProperty Name="username" ColumnName="username" />
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

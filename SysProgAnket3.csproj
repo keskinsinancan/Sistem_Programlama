@@ -1,4 +1,5 @@
-﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\Microsoft.Net.Compilers.2.4.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.4.0\build\Microsoft.Net.Compilers.props')" />
@@ -107,16 +108,17 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="CSS\Login.css" />
     <Content Include="Global.asax" />
+    <Content Include="img\logo-accessdenied.png" />
     <Content Include="img\ytulogo.png" />
-    <Content Include="Models\LectureModel.Context.tt">
+    <Content Include="Models\SysProgModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>LectureModel.Context.cs</LastGenOutput>
-      <DependentUpon>LectureModel.edmx</DependentUpon>
+      <DependentUpon>SysProgModel.edmx</DependentUpon>
+      <LastGenOutput>SysProgModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\LectureModel.tt">
+    <Content Include="Models\SysProgModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>LectureModel.edmx</DependentUpon>
-      <LastGenOutput>LectureModel.cs</LastGenOutput>
+      <DependentUpon>SysProgModel.edmx</DependentUpon>
+      <LastGenOutput>SysProgModel.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -140,6 +142,13 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <EntityDeploy Include="Models\SysProgModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SysProgModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\SysProgModel.edmx.diagram">
+      <DependentUpon>SysProgModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />
@@ -153,6 +162,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Views\DersDetaylari\NewGroup.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -171,70 +181,66 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccessDeniedController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AnketController.cs" />
     <Compile Include="Controllers\DersDetaylariController.cs" />
+    <Compile Include="Controllers\dersterTestController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LectureController.cs" />
     <Compile Include="Controllers\LecturerController.cs" />
-    <Compile Include="Controllers\OgrenciDersController.cs" />
+    <Compile Include="Controllers\OpenCourseController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\StudentCourseController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Bolumler.cs">
-      <DependentUpon>LectureModel.tt</DependentUpon>
+      <DependentUpon>SysProgModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Dersler.cs">
-      <DependentUpon>LectureModel.tt</DependentUpon>
+      <DependentUpon>SysProgModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Ders_Detaylari.cs">
-      <DependentUpon>LectureModel.tt</DependentUpon>
+      <DependentUpon>SysProgModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Fakulteler.cs">
-      <DependentUpon>LectureModel.tt</DependentUpon>
+      <DependentUpon>SysProgModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Hocalar.cs">
-      <DependentUpon>LectureModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LectureModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LectureModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LectureModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LectureModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LectureModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LectureModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Ogrenciler.cs">
-      <DependentUpon>LectureModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Ogrenci_Ders.cs">
-      <DependentUpon>LectureModel.tt</DependentUpon>
+      <DependentUpon>SysProgModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\Ogrenciler.cs">
+      <DependentUpon>SysProgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ogrenci_Ders.cs">
+      <DependentUpon>SysProgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SysProgModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SysProgModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SysProgModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SysProgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SysProgModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SysProgModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\users.cs">
-      <DependentUpon>LectureModel.tt</DependentUpon>
+      <DependentUpon>SysProgModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\CustomAuthorize.cs" />
     <Compile Include="Security\UserRoleProvider.cs" />
+    <Compile Include="ViewModels\DersGrupViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
-    <EntityDeploy Include="Models\LectureModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>LectureModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\LectureModel.edmx.diagram">
-      <DependentUpon>LectureModel.edmx</DependentUpon>
-    </Content>
     <None Include="packages.config" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Lecture\Index.cshtml" />
@@ -259,11 +265,23 @@
     <Content Include="Views\Lecturer\Details.cshtml" />
     <Content Include="Views\Lecturer\Edit.cshtml" />
     <Content Include="Views\Lecturer\Index.cshtml" />
-    <Content Include="Views\OgrenciDers\Create.cshtml" />
-    <Content Include="Views\OgrenciDers\Delete.cshtml" />
-    <Content Include="Views\OgrenciDers\Details.cshtml" />
-    <Content Include="Views\OgrenciDers\Edit.cshtml" />
-    <Content Include="Views\OgrenciDers\Index.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\StudentCourse\Create.cshtml" />
+    <Content Include="Views\StudentCourse\Delete.cshtml" />
+    <Content Include="Views\StudentCourse\Details.cshtml" />
+    <Content Include="Views\StudentCourse\Edit.cshtml" />
+    <Content Include="Views\StudentCourse\Index.cshtml" />
+    <Content Include="Views\dersterTest\Create.cshtml" />
+    <Content Include="Views\dersterTest\Delete.cshtml" />
+    <Content Include="Views\dersterTest\Details.cshtml" />
+    <Content Include="Views\dersterTest\Edit.cshtml" />
+    <Content Include="Views\dersterTest\Index.cshtml" />
+    <Content Include="Views\OpenCourse\Delete.cshtml" />
+    <Content Include="Views\OpenCourse\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -273,8 +291,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="ViewModels\" />
-    <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

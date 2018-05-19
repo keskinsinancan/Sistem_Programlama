@@ -4,14 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="32cf7a2725d44c77b1526a4e94814879" Name="Diagram1" ZoomLevel="97">
-        <EntityTypeShape EntityType="SysProgDbModel.Bolumler" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="SysProgDbModel.Ders_Detaylari" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="SysProgDbModel.Fakulteler" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="SysProgDbModel.Hocalar" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="SysProgDbModel.Ogrenciler" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SysProgDbModel.Dersler" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="SysProgDbModel.Ogrenci_Ders" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
+      <Diagram DiagramId="55bc612ea13e417f9b4e1397902cb261" Name="Diagram1">
+        <EntityTypeShape EntityType="SysProgDbModel.Bolumler" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SysProgDbModel.Ders_Detaylari" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SysProgDbModel.Dersler" Width="1.5" PointX="5.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SysProgDbModel.Fakulteler" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SysProgDbModel.Hocalar" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SysProgDbModel.Ogrenci_Ders" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SysProgDbModel.Ogrenciler" Width="1.5" PointX="3" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SysProgDbModel.users" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="SysProgDbModel.fk_acan_bolum_kodu" ManuallyRouted="false" />
         <AssociationConnector Association="SysProgDbModel.fk_blm_kodu" ManuallyRouted="false" />
         <AssociationConnector Association="SysProgDbModel.fk_bol_kodu" ManuallyRouted="false" />
@@ -20,7 +21,6 @@
         <AssociationConnector Association="SysProgDbModel.fk_hoca_kodu" ManuallyRouted="false" />
         <AssociationConnector Association="SysProgDbModel.fk_ogr_no" ManuallyRouted="false" />
         <AssociationConnector Association="SysProgDbModel.Fakulte_Bolum" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="SysProgDbModel.users" Width="1.5" PointX="7.875" PointY="5.625" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

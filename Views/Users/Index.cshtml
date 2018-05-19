@@ -1,0 +1,66 @@
+﻿@model IEnumerable<SysProgAnket3.Models.users>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<body>
+
+    <h2>Kullanıcı Listesi</h2>
+    @ViewBag.message
+
+    <p>
+        @Html.ActionLink("Yeni Kullanıcı Ekle", "Create")
+    </p>
+    <table class="table table-bordered" id="userTable">
+        <thead>
+            <tr>
+                <th>
+                    Kullanıcı Adı
+                </th>
+                <th>
+                    Şifre
+                </th>
+                <th>
+                    E-Posta
+                </th>
+                <th>
+                    Role
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.username)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.password)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.role)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Düzenle", "Edit", new { id = item.id }) |
+                        @Html.ActionLink("Detaylar", "Details", new { id = item.id }) |
+                        @Html.ActionLink("Sil", "Delete", new { id = item.id })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+    <script>
+        $(function () {
+            $("#userTable").dataTable();
+        })
+    </script>
+</body>

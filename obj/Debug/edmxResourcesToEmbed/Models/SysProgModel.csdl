@@ -26,6 +26,18 @@
     <NavigationProperty Name="Dersler" Relationship="Self.fk_ders_kodu" FromRole="Ders_Detaylari" ToRole="Dersler" />
     <NavigationProperty Name="Ogrenci_Ders" Relationship="Self.fk_drs_kodu" FromRole="Ders_Detaylari" ToRole="Ogrenci_Ders" />
   </EntityType>
+  <EntityType Name="Dersler">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ders_kodu" Type="Int32" />
+    <Property Name="grup_no" Type="Int32" Nullable="false" />
+    <Property Name="dersin_adi" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="hoca_kodu" Type="Int32" />
+    <NavigationProperty Name="Ders_Detaylari" Relationship="Self.fk_ders_kodu" FromRole="Dersler" ToRole="Ders_Detaylari" />
+    <NavigationProperty Name="Hocalar" Relationship="Self.fk_hoca_kodu" FromRole="Dersler" ToRole="Hocalar" />
+  </EntityType>
   <EntityType Name="Fakulteler">
     <Key>
       <PropertyRef Name="fakulte_kodu" />
@@ -45,6 +57,18 @@
     <NavigationProperty Name="Bolumler" Relationship="Self.fk_bol_kodu" FromRole="Hocalar" ToRole="Bolumler" />
     <NavigationProperty Name="Dersler" Relationship="Self.fk_hoca_kodu" FromRole="Hocalar" ToRole="Dersler" />
   </EntityType>
+  <EntityType Name="Ogrenci_Ders">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ogr_no" Type="Int32" Nullable="false" />
+    <Property Name="ders_kodu" Type="Int32" Nullable="false" />
+    <Property Name="grubu" Type="Int32" Nullable="false" />
+    <Property Name="ders_adi" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Ders_Detaylari" Relationship="Self.fk_drs_kodu" FromRole="Ogrenci_Ders" ToRole="Ders_Detaylari" />
+    <NavigationProperty Name="Ogrenciler" Relationship="Self.fk_ogr_no" FromRole="Ogrenci_Ders" ToRole="Ogrenciler" />
+  </EntityType>
   <EntityType Name="Ogrenciler">
     <Key>
       <PropertyRef Name="ogr_no" />
@@ -56,32 +80,15 @@
     <NavigationProperty Name="Bolumler" Relationship="Self.fk_blm_kodu" FromRole="Ogrenciler" ToRole="Bolumler" />
     <NavigationProperty Name="Ogrenci_Ders" Relationship="Self.fk_ogr_no" FromRole="Ogrenciler" ToRole="Ogrenci_Ders" />
   </EntityType>
-  <EntityType Name="Dersler">
+  <EntityType Name="users">
     <Key>
-      <PropertyRef Name="grup_no" />
-      <PropertyRef Name="dersin_adi" />
-    </Key>
-    <Property Name="ders_kodu" Type="Int32" />
-    <Property Name="grup_no" Type="Int32" Nullable="false" />
-    <Property Name="dersin_adi" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="hoca_kodu" Type="Int32" />
-    <NavigationProperty Name="Ders_Detaylari" Relationship="Self.fk_ders_kodu" FromRole="Dersler" ToRole="Ders_Detaylari" />
-    <NavigationProperty Name="Hocalar" Relationship="Self.fk_hoca_kodu" FromRole="Dersler" ToRole="Hocalar" />
-  </EntityType>
-  <EntityType Name="Ogrenci_Ders">
-    <Key>
-      <PropertyRef Name="ogr_no" />
-      <PropertyRef Name="ders_kodu" />
-      <PropertyRef Name="grubu" />
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="ogr_no" Type="Int32" Nullable="false" />
-    <Property Name="ders_kodu" Type="Int32" Nullable="false" />
-    <Property Name="grubu" Type="Int32" Nullable="false" />
-    <Property Name="ders_adi" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Ders_Detaylari" Relationship="Self.fk_drs_kodu" FromRole="Ogrenci_Ders" ToRole="Ders_Detaylari" />
-    <NavigationProperty Name="Ogrenciler" Relationship="Self.fk_ogr_no" FromRole="Ogrenci_Ders" ToRole="Ogrenciler" />
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
   </EntityType>
   <Association Name="fk_acan_bolum_kodu">
     <End Role="Bolumler" Type="Self.Bolumler" Multiplicity="0..1" />
@@ -174,11 +181,12 @@
   <EntityContainer Name="SysProgDbEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Bolumler" EntityType="Self.Bolumler" />
     <EntitySet Name="Ders_Detaylari" EntityType="Self.Ders_Detaylari" />
+    <EntitySet Name="Dersler" EntityType="Self.Dersler" />
     <EntitySet Name="Fakulteler" EntityType="Self.Fakulteler" />
     <EntitySet Name="Hocalar" EntityType="Self.Hocalar" />
-    <EntitySet Name="Ogrenciler" EntityType="Self.Ogrenciler" />
-    <EntitySet Name="Dersler" EntityType="Self.Dersler" />
     <EntitySet Name="Ogrenci_Ders" EntityType="Self.Ogrenci_Ders" />
+    <EntitySet Name="Ogrenciler" EntityType="Self.Ogrenciler" />
+    <EntitySet Name="users" EntityType="Self.users" />
     <AssociationSet Name="fk_acan_bolum_kodu" Association="Self.fk_acan_bolum_kodu">
       <End Role="Bolumler" EntitySet="Bolumler" />
       <End Role="Ders_Detaylari" EntitySet="Ders_Detaylari" />
@@ -211,16 +219,5 @@
       <End Role="Bolumler" EntitySet="Bolumler" />
       <End Role="Fakulteler" EntitySet="Fakulteler" />
     </AssociationSet>
-    <EntitySet Name="users" EntityType="SysProgDbModel.users" />
   </EntityContainer>
-  <EntityType Name="users">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" />
-    <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="email" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="role" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-  </EntityType>
 </Schema>

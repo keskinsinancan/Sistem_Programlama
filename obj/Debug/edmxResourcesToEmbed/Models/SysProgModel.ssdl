@@ -19,13 +19,11 @@
     <Property Name="toplam_kredi" Type="int" />
     <Property Name="acan_bolum_kodu" Type="int" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'SysProgDb.dbo.Dersler' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="Dersler">
     <Key>
-      <PropertyRef Name="grup_no" />
-      <PropertyRef Name="dersin_adi" />
+      <PropertyRef Name="id" />
     </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ders_kodu" Type="int" />
     <Property Name="grup_no" Type="int" Nullable="false" />
     <Property Name="dersin_adi" Type="nvarchar" MaxLength="255" Nullable="false" />
@@ -197,19 +195,12 @@ warning 6002: The table/view 'SysProgDb.dbo.Fakulte_Bolum' does not have a prima
   <EntityContainer Name="SysProgDbModelStoreContainer">
     <EntitySet Name="Bolumler" EntityType="Self.Bolumler" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ders_Detaylari" EntityType="Self.Ders_Detaylari" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Dersler" EntityType="Self.Dersler" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Fakulteler" EntityType="Self.Fakulteler" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Hocalar" EntityType="Self.Hocalar" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ogrenci_Ders" EntityType="Self.Ogrenci_Ders" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ogrenciler" EntityType="Self.Ogrenciler" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Dersler" EntityType="Self.Dersler" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [Dersler].[ders_kodu] AS [ders_kodu], 
-    [Dersler].[grup_no] AS [grup_no], 
-    [Dersler].[dersin_adi] AS [dersin_adi], 
-    [Dersler].[hoca_kodu] AS [hoca_kodu]
-    FROM [dbo].[Dersler] AS [Dersler]</DefiningQuery>
-    </EntitySet>
     <EntitySet Name="Fakulte_Bolum" EntityType="Self.Fakulte_Bolum" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [Fakulte_Bolum].[fakulte_kodu] AS [fakulte_kodu], 

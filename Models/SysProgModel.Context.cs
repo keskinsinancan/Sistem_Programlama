@@ -27,11 +27,11 @@ namespace SysProgAnket3.Models
     
         public virtual DbSet<Bolumler> Bolumler { get; set; }
         public virtual DbSet<Ders_Detaylari> Ders_Detaylari { get; set; }
+        public virtual DbSet<Dersler> Dersler { get; set; }
         public virtual DbSet<Fakulteler> Fakulteler { get; set; }
         public virtual DbSet<Hocalar> Hocalar { get; set; }
-        public virtual DbSet<Ogrenciler> Ogrenciler { get; set; }
-        public virtual DbSet<Dersler> Dersler { get; set; }
         public virtual DbSet<Ogrenci_Ders> Ogrenci_Ders { get; set; }
+        public virtual DbSet<Ogrenciler> Ogrenciler { get; set; }
         public virtual DbSet<users> users { get; set; }
     }
 }

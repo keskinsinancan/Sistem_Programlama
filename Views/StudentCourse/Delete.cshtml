@@ -1,0 +1,54 @@
+﻿@model SysProgAnket3.Models.Ogrenci_Ders
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Öğrenciden dersi kaldırmak istediğinize emin misiniz?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Öğrenci Adı
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ogrenciler.adi)
+            @Html.DisplayFor(model => model.Ogrenciler.soyadi)
+        </dd>
+
+        <dt>
+            Ders Adı)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ders_adi)
+        </dd>
+
+        <dt>
+            Ders Kodu
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ders_Detaylari.ders_kodu)
+        </dd>
+        
+        <dt>
+            Grubu
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.grubu)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Sil" class="btn btn-danger" /> |
+            @Html.ActionLink("Listeye Dön", "Index")
+        </div>
+    }
+</div>

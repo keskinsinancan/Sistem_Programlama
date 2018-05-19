@@ -14,6 +14,7 @@ namespace SysProgAnket3.Models
     
     public partial class Dersler
     {
+        public int id { get; set; }
         public Nullable<int> ders_kodu { get; set; }
         public int grup_no { get; set; }
         public string dersin_adi { get; set; }

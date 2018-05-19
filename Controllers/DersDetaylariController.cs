@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SysProgAnket3.Models;
+using SysProgAnket3.ViewModels;
 
 namespace SysProgAnket3.Controllers
 {
@@ -59,14 +60,21 @@ namespace SysProgAnket3.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ders_kodu,ders_adi,teori,pratik,lab,toplam_kredi,acan_bolum_kodu")] Ders_Detaylari ders_Detaylari)
         {
-            if (ModelState.IsValid)
+            var ders = db.Ders_Detaylari.Find(ders_Detaylari.ders_kodu);
+            if (ders == null)
             {
-                db.Ders_Detaylari.Add(ders_Detaylari);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+
+                if (ModelState.IsValid)
+                {
+                    db.Ders_Detaylari.Add(ders_Detaylari);
+                    db.SaveChanges();
+                    ViewBag.message = "Ders başarıyla eklendi";
+                    return RedirectToAction("Index");
+                }
             }
 
             ViewBag.acan_bolum_kodu = new SelectList(db.Bolumler, "bolum_kodu", "bolum_adi", ders_Detaylari.acan_bolum_kodu);
+            ViewBag.message = "Ders zaten var.!";
             return View(ders_Detaylari);
         }
 
@@ -127,7 +135,46 @@ namespace SysProgAnket3.Controllers
             db.Ders_Detaylari.Remove(ders_Detaylari);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }  
+
+        public ActionResult NewGroup()
+        {   
+            ViewBag.ders_kodu = new SelectList(db.Ders_Detaylari.Where(dt => dt.acan_bolum_kodu == 11), "ders_kodu", "ders_adi");
+            ViewBag.hoca_kodu = new SelectList(db.Hocalar.Where(hc => hc.bolum_kodu == 11), "hoca_kodu", "adi");
+           
+            return View("NewGroup");
         }
+        
+        [HttpPost, ActionName("NewGroup")]
+        public ActionResult NewGroup(DersGrupViewModel ders)
+        {
+            var isInDb = db.Dersler.FirstOrDefault(dr => dr.ders_kodu == ders.ders_kodu && dr.hoca_kodu == ders.hoca_kodu && dr.grup_no == ders.grup_no);
+            var tmp = db.Ders_Detaylari.FirstOrDefault(dr => dr.ders_kodu == ders.ders_kodu);
+               // db.Ogrenci_Ders.Where(m => m.ogr_no == _stdId
+            if (isInDb == null)
+            {
+                var dersToDb = new Dersler();
+                dersToDb.ders_kodu = ders.ders_kodu;
+                dersToDb.hoca_kodu = ders.hoca_kodu;
+                dersToDb.grup_no = ders.grup_no;
+                dersToDb.dersin_adi = tmp.ders_adi;
+
+                db.Dersler.Add(dersToDb);
+                db.SaveChanges();
+                ViewBag.message = "Yeni grup eklenmiştir.";
+                ViewBag.ders_kodu = new SelectList(db.Ders_Detaylari.Where(dt => dt.acan_bolum_kodu == 11), "ders_kodu", "ders_adi");
+                ViewBag.hoca_kodu = new SelectList(db.Hocalar.Where(hc => hc.bolum_kodu == 11), "hoca_kodu", "adi");
+                return View();
+            }
+            else
+            {
+                ViewBag.message = "Grup zaten acılmış";
+                ViewBag.ders_kodu = new SelectList(db.Ders_Detaylari.Where(dt => dt.acan_bolum_kodu == 11), "ders_kodu", "ders_adi");
+                ViewBag.hoca_kodu = new SelectList(db.Hocalar.Where(hc => hc.bolum_kodu == 11), "hoca_kodu", "adi");
+                return View("NewGroup");
+            }
+        }
+        
 
         protected override void Dispose(bool disposing)
         {

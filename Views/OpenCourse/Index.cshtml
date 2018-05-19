@@ -1,0 +1,55 @@
+﻿@model IEnumerable<SysProgAnket3.Models.Dersler>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<body>
+    <h2>Açılan Dersler</h2>
+    <p>
+        <a href="/DersDetaylari/NewGroup">Yeni Grup Ekle</a>
+    </p>
+    <table class="table table-bordered" id="openCourseTable">
+        <thead>
+            <tr>
+                <th>
+                    Dersin Adı
+                </th>
+                <th>
+                    Grup Numarası
+                </th>
+                <th>
+                    Ders Yürütücüsü
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.dersin_adi)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.grup_no)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Hocalar.adi)
+                        @Html.DisplayFor(modelItem => item.Hocalar.soyadi)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Sil", "Delete", new { id = item.id })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+    <script>
+        $(function () {
+            $("#openCourseTable").dataTable();
+        })
+    </script>
+</body>

@@ -1,12 +1,17 @@
-﻿@model SysProgAnket3.Models.Ders_Detaylari
+﻿@using System.Web.UI.WebControls
+@model SysProgAnket3.Models.Ders_Detaylari
 
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
 <h2>Ders Ekleme</h2>
 
+<h1>
+    <b>@ViewBag.message</b>
+</h1>
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
